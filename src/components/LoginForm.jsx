@@ -3,6 +3,7 @@ import app from '../firebase/firebase.init';
 import { useContext, useState } from 'react';
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { Context } from '../context/AppContext';
+import Axios from 'axios';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -11,8 +12,7 @@ const LoginForm = () => {
   const [success, setSuccess] = useState('');
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const { setUser, setUserPhoto, user } = useContext(Context);
-  console.log(user);
+  const { setUser, setUserPhoto, setLoggedUser } = useContext(Context);
 
   function handleGoogleSignIn() {
     signInWithPopup(auth, provider)
@@ -43,11 +43,13 @@ const LoginForm = () => {
     setError('');
     setSuccess('');
     signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
+      .then(async userCredential => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
         setSuccess('Login successful!');
+        const res = await Axios.post('http://localhost:5000/login', { email });
+        setLoggedUser(res.data);
         setUser(user.displayName);
         setUserPhoto(user.photoURL);
       })

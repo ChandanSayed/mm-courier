@@ -6,6 +6,7 @@ import './index.css';
 import Home from './components/Home.jsx';
 import Login from './components/Login.jsx';
 import AppContext from './context/AppContext.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -13,10 +14,17 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <Error />,
     children: [
-      { path: '/', element: <Home /> },
+      {
+        path: '/',
+        element: <Home />
+      },
       {
         path: '/login',
         element: <Login />
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
       }
     ]
   }

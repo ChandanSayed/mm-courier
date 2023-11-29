@@ -7,6 +7,7 @@ export const Context = createContext(null);
 export default function AppContext({ children }) {
   const [user, setUser] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
+  const [loggedUser, setLoggedUser] = useState({});
 
   const auth = getAuth(app);
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function AppContext({ children }) {
       }
     });
   }, []);
-  return <Context.Provider value={{ user, userPhoto, setUser, setUserPhoto }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ user, userPhoto, setUser, setUserPhoto, loggedUser, setLoggedUser }}>{children}</Context.Provider>;
 }
 
 // export default AppContext;
