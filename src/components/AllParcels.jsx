@@ -59,6 +59,7 @@ const AllParcels = () => {
         deliveryMen: ''
       });
       setRefreshBookingList(prev => prev + 1);
+      setShowForm(false);
     }
   }
 
