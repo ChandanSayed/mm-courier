@@ -1,9 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Context } from '../context/AppContext';
 
 const AllParcels = () => {
+  const { loggedUser, refreshBookingList, setRefreshBookingList } = useContext(Context);
   const [bookingCount, setBookingCount] = useState([]);
   const [deliverMen, setDeliveryMen] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -20,6 +22,11 @@ const AllParcels = () => {
     getBookings();
     getDeliveryMen();
   }, []);
+
+  useEffect(() => {
+    getBookings();
+    getDeliveryMen();
+  }, [refreshBookingList]);
 
   async function getBookings() {
     const res = await axios.get('https://mm-courier-server.onrender.com/all-bookings');
@@ -51,6 +58,7 @@ const AllParcels = () => {
         approximateDeliveryDate: '',
         deliveryMen: ''
       });
+      setRefreshBookingList(prev => prev + 1);
     }
   }
 

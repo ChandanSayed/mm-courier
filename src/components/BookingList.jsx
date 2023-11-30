@@ -96,19 +96,19 @@ const BookingList = () => {
                   <td>{list.status}</td>
                   <td>
                     {list.status.toLowerCase() === 'pending' ? (
-                      <Link className="btn" to={`/update-booking/${list._id}`}>
+                      <Link className="btn ml-2 mt-1" to={`/update-booking/${list._id}`}>
                         Update
                       </Link>
                     ) : (
-                      <button className="btn" disabled={true} onClick={handleUpdateError}>
+                      <button className="btn ml-2 mt-1" disabled={true} onClick={handleUpdateError}>
                         Update
                       </button>
                     )}
 
                     {list.status.toLowerCase() === 'delivered' ? (
-                      <button className="btn ml-2">Review</button>
+                      <button className="btn ml-2 mt-1">Review</button>
                     ) : (
-                      <button className="btn ml-2" onClick={() => handleCancel(list._id)} disabled={list.status.toLowerCase() === 'pending' ? false : true}>
+                      <button className="btn ml-2 mt-1" onClick={() => handleCancel(list._id)} disabled={list.status.toLowerCase() === 'pending' ? false : true}>
                         Cancel
                       </button>
                     )}
