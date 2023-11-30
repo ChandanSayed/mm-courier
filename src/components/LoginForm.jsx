@@ -1,9 +1,11 @@
 import { FcGoogle } from 'react-icons/fc';
 import app from '../firebase/firebase.init';
 import { useContext, useState } from 'react';
-import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { Context } from '../context/AppContext';
 import Axios from 'axios';
+import { Navigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -60,6 +62,25 @@ const LoginForm = () => {
         const res = await Axios.post('http://localhost:5000/login', { email });
         localStorage.setItem('loggedUser', JSON.stringify(res.data));
         console.log(res.data);
+        if (!res.data) {
+          function handleLogout() {
+            signOut(auth)
+              .then(() => {
+                localStorage.removeItem('loggedUser');
+                setUser('');
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!'
+                });
+                return <Navigate to={'/'} />;
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          }
+          return handleLogout();
+        }
         setLoggedUser(res.data);
         setUser(user.displayName);
         setUserPhoto(user.photoURL);

@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
+import { Context } from '../context/AppContext';
 
 const Footer = () => {
+  const { user } = useContext(Context);
   return (
     <footer className="footer p-10 bg-neutral text-neutral-content">
-      <Link to={'/'} className="text-4xl font-bold text-red-600 flex justify-center w-full">
-        W<span className="text-yellow-500">M</span>
-      </Link>
-      <nav className="w-full justify-center">
-        <header className="footer-title">Social</header>
+      <div className="flex flex-col gap-[30px] items-center justify-center mb-[60px] w-full">
+        <Logo textColor="text-white" />
+        <ul className="flex flex-col items-center lg:flex-row gap-5">
+          <li>
+            <Link className="text-white text-xs" to={'/'}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link className="text-white text-xs" to={'/dashboard'}>
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link to={'/login'} className={`text-white text-xs ${!user ? '' : 'hidden'}`}>
+              Login
+            </Link>
+          </li>
+        </ul>
+
         <div className="grid grid-flow-col gap-4">
           <a>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
@@ -26,7 +44,7 @@ const Footer = () => {
             </svg>
           </a>
         </div>
-      </nav>
+      </div>
     </footer>
   );
 };

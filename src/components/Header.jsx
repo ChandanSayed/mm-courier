@@ -3,6 +3,7 @@ import { Link, NavLink, Navigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import app from '../firebase/firebase.init';
 import { Context } from '../context/AppContext';
+import Logo from './Logo';
 
 const Header = () => {
   const { user, userPhoto, setUser } = useContext(Context);
@@ -39,9 +40,7 @@ const Header = () => {
     <header>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <Link to={'/'} className="text-4xl font-bold text-red-600">
-            W<span className="text-yellow-500">M</span>
-          </Link>
+          <Logo />
         </div>
         <div className="navbar-start">
           <div className="dropdown">

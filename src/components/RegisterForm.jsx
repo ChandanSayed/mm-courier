@@ -33,7 +33,7 @@ const RegisterForm = () => {
         const user = userCredential.user;
         console.log(user);
         setSuccess('User registration successful!');
-
+        localStorage.setItem('loggedUser', JSON.stringify({ name, email, profilePicture, userType }));
         updateProfile(user, {
           displayName: name,
           photoURL: profilePicture
