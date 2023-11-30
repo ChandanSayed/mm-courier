@@ -66,7 +66,7 @@ const UpdateBooking = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const res = await axios.post(`http://localhost:5000/update-booking/${id}`, formData);
+    const res = await axios.post(`https://mm-courier-server.onrender.com/update-booking/${id}`, formData);
     if (res.data) {
       Swal.fire('Updated!');
       navigate('/dashboard');
@@ -78,7 +78,7 @@ const UpdateBooking = () => {
   }, []);
 
   async function getBookingDetails() {
-    const res = await axios.get(`http://localhost:5000/booking/${id}`, id);
+    const res = await axios.get(`https://mm-courier-server.onrender.com/booking/${id}`, id);
 
     setFormData(res.data);
     setLoader(false);

@@ -65,7 +65,7 @@ const ParcelForm = () => {
     if (!formData.phone || !formData.parcelType || !formData.parcelWeight || !formData.receiverName || !formData.receiverPhone || !formData.deliveryAddress || !formData.requestedDeliveryDate || !formData.deliveryAddressLatitude || !formData.deliveryAddressLongitude) {
       return setError('Fill all the fields please!');
     }
-    const res = await axios.post('http://localhost:5000/booking', { ...formData, bookingDate: getFormattedDate() });
+    const res = await axios.post('https://mm-courier-server.onrender.com/booking', { ...formData, bookingDate: getFormattedDate() });
     if (res.data) {
       Swal.fire('Booking Listed!');
     }

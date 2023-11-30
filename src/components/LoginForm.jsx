@@ -27,12 +27,12 @@ const LoginForm = () => {
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         console.log(user);
-        const res = await Axios.post('http://localhost:5000/login', { email: user.email });
+        const res = await Axios.post('https://mm-courier-server.onrender.com/login', { email: user.email });
         console.log(res.data);
         if (res.data) {
           localStorage.setItem('loggedUser', JSON.stringify(res.data));
         } else {
-          const res = await Axios.post('http://localhost:5000/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL, userType: 'user' });
+          const res = await Axios.post('https://mm-courier-server.onrender.com/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL, userType: 'user' });
           console.log(res.data);
           localStorage.setItem('loggedUser', JSON.stringify({ name: user.displayName, email: user.email, profilePicture: user.photoURL, userType: 'user' }));
         }
@@ -59,7 +59,7 @@ const LoginForm = () => {
         const user = userCredential.user;
         console.log(user);
         setSuccess('Login successful!');
-        const res = await Axios.post('http://localhost:5000/login', { email });
+        const res = await Axios.post('https://mm-courier-server.onrender.com/login', { email });
         localStorage.setItem('loggedUser', JSON.stringify(res.data));
         console.log(res.data);
         if (!res.data) {

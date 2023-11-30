@@ -10,14 +10,14 @@ const BookingList = () => {
 
   useEffect(() => {
     async function getBookings() {
-      const res = await axios.get(`http://localhost:5000/bookings?email=${loggedUser.email}`);
+      const res = await axios.get(`https://mm-courier-server.onrender.com/bookings?email=${loggedUser.email}`);
       setBookingList(res.data);
     }
     getBookings();
   }, []);
   useEffect(() => {
     async function getBookings() {
-      const res = await axios.get(`http://localhost:5000/bookings?email=${loggedUser.email}`);
+      const res = await axios.get(`https://mm-courier-server.onrender.com/bookings?email=${loggedUser.email}`);
       setBookingList(res.data);
     }
     getBookings();
@@ -53,7 +53,7 @@ const BookingList = () => {
     }).then(async result => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        const res = await axios.post('http://localhost:5000/cancel', { id });
+        const res = await axios.post('https://mm-courier-server.onrender.com/cancel', { id });
         if (res.data) {
           Swal.fire('Cancelled!', '', 'success');
           setRefreshBookingList(prev => prev + 1);

@@ -40,7 +40,7 @@ const RegisterForm = () => {
         })
           .then(async () => {
             console.log('Profile updated!');
-            const res = await Axios.post('http://localhost:5000/register', { name, email, profilePicture, userType });
+            const res = await Axios.post('https://mm-courier-server.onrender.com/register', { name, email, profilePicture, userType });
             console.log(res.data);
           })
           .catch(error => {

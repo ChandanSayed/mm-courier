@@ -2,8 +2,8 @@ import CountUp from 'react-countup';
 
 const Statistic = () => {
   return (
-    <div className="py-8 bg-gradient-to-b from-blue-300 from-0% via-blue-100 via-60% to-white to-90% px-[30px] ">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <div className="py-12 bg-gradient-to-b from-blue-300 from-0% via-blue-100 via-60% to-white to-90%">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-[1320px] px-4 mx-auto">
         <div className="card bg-base-100 shadow-xl">
           <div className="card-body">
             <p className="text-sm lg:text-xl text-center mb-2">Number of Parcel Booked</p>
