@@ -16,7 +16,7 @@ const LoginForm = () => {
 
   function handleGoogleSignIn() {
     signInWithPopup(auth, provider)
-      .then(result => {
+      .then(async result => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
@@ -25,6 +25,15 @@ const LoginForm = () => {
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         console.log(user);
+        const res = await Axios.post('http://localhost:5000/login', { email: user.email });
+        console.log(res.data);
+        if (res.data) {
+          localStorage.setItem('loggedUser', JSON.stringify(res.data));
+        } else {
+          const res = await Axios.post('http://localhost:5000/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL, userType: 'user' });
+          console.log(res.data);
+          localStorage.setItem('loggedUser', JSON.stringify({ name: user.displayName, email: user.email, profilePicture: user.photoURL, userType: 'user' }));
+        }
       })
       .catch(error => {
         // Handle Errors here.
@@ -49,6 +58,8 @@ const LoginForm = () => {
         console.log(user);
         setSuccess('Login successful!');
         const res = await Axios.post('http://localhost:5000/login', { email });
+        localStorage.setItem('loggedUser', JSON.stringify(res.data));
+        console.log(res.data);
         setLoggedUser(res.data);
         setUser(user.displayName);
         setUserPhoto(user.photoURL);

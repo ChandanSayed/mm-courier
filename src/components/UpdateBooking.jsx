@@ -1,12 +1,18 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Context } from '../context/AppContext';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const UpdateBooking = () => {
+  let { id } = useParams();
   const { loggedUser } = useContext(Context);
+  const [bookingDetails, setBookingDetails] = useState({});
+  const navigate = useNavigate();
+  const [loader, setLoader] = useState(true);
   const [formData, setFormData] = useState({
-    name: loggedUser.name,
-    email: loggedUser.email,
+    name: '',
+    email: '',
     phone: '',
     parcelType: '',
     parcelWeight: '',
@@ -16,7 +22,7 @@ const UpdateBooking = () => {
     requestedDeliveryDate: '',
     deliveryAddressLatitude: '',
     deliveryAddressLongitude: '',
-    price: 0,
+    price: '',
     status: 'pending',
     approximateDeliveryDate: '',
     deliveryMen: ''
@@ -60,9 +66,27 @@ const UpdateBooking = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const res = await axios.post('http://localhost:5000/booking', { ...formData, bookingDate: getFormattedDate() });
-    console.log(res.data);
+    const res = await axios.post(`http://localhost:5000/update-booking/${id}`, formData);
+    if (res.data) {
+      Swal.fire('Updated!');
+      navigate('/dashboard');
+    }
   };
+
+  useEffect(() => {
+    getBookingDetails();
+  }, []);
+
+  async function getBookingDetails() {
+    const res = await axios.get(`http://localhost:5000/booking/${id}`, id);
+
+    setFormData(res.data);
+    setLoader(false);
+  }
+
+  if (loader) {
+    return <span className="loading loading-spinner text-warning"></span>;
+  }
 
   return (
     <form className="max-w-2xl rounded-lg mx-auto my-8 p-8 bg-white shadow-md">

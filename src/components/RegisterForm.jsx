@@ -41,7 +41,7 @@ const RegisterForm = () => {
           .then(async () => {
             console.log('Profile updated!');
             const res = await Axios.post('http://localhost:5000/register', { name, email, profilePicture, userType });
-            console.log(res);
+            console.log(res.data);
           })
           .catch(error => {
             // An error occurred

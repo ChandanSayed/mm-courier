@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const BookingList = () => {
-  const { loggedUser } = useContext(Context);
+  const { loggedUser, refreshBookingList, setRefreshBookingList } = useContext(Context);
   const [bookingList, setBookingList] = useState([]);
 
   useEffect(() => {
@@ -15,6 +15,13 @@ const BookingList = () => {
     }
     getBookings();
   }, []);
+  useEffect(() => {
+    async function getBookings() {
+      const res = await axios.get(`http://localhost:5000/bookings?email=${loggedUser.email}`);
+      setBookingList(res.data);
+    }
+    getBookings();
+  }, [refreshBookingList]);
 
   function handleSort() {
     setBookingList(
@@ -49,6 +56,7 @@ const BookingList = () => {
         const res = await axios.post('http://localhost:5000/cancel', { id });
         if (res.data) {
           Swal.fire('Cancelled!', '', 'success');
+          setRefreshBookingList(prev => prev + 1);
         }
       } else if (result.isDenied) {
         Swal.fire('Status remains the same!', '', 'info');

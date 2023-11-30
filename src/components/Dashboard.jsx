@@ -1,15 +1,28 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import ParcelForm from './ParcelForm';
 import { Context } from '../context/AppContext';
 import BookingList from './BookingList';
 
 const Dashboard = () => {
-  const { loggedUser } = useContext(Context);
-  let [showTab, setShowTab] = useState(1);
+  const { loggedUser, setLoggedUser } = useContext(Context);
+  const [showTab, setShowTab] = useState(0);
+  const [loading, setLoading] = useState(true);
   function tabChange(index) {
     setShowTab(index);
   }
   console.log(loggedUser);
+
+  if (!loggedUser) {
+  }
+
+  useEffect(() => {
+    setLoggedUser(JSON.parse(localStorage.getItem('loggedUser')));
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return <span className="loading loading-spinner text-warning"></span>;
+  }
 
   return (
     <div className="bg-gray-200 min-h-screen flex">

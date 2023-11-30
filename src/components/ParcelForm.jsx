@@ -1,9 +1,11 @@
 import { useState, useContext } from 'react';
 import { Context } from '../context/AppContext';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const ParcelForm = () => {
-  const { loggedUser } = useContext(Context);
+  const { loggedUser, refreshBookingList, setRefreshBookingList } = useContext(Context);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: loggedUser.name,
     email: loggedUser.email,
@@ -60,8 +62,31 @@ const ParcelForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    if (!formData.phone || !formData.parcelType || !formData.parcelWeight || !formData.receiverName || !formData.receiverPhone || !formData.deliveryAddress || !formData.requestedDeliveryDate || !formData.deliveryAddressLatitude || !formData.deliveryAddressLongitude) {
+      return setError('Fill all the fields please!');
+    }
     const res = await axios.post('http://localhost:5000/booking', { ...formData, bookingDate: getFormattedDate() });
-    console.log(res.data);
+    if (res.data) {
+      Swal.fire('Booking Listed!');
+    }
+    setRefreshBookingList(prev => prev + 1);
+    setFormData({
+      name: loggedUser.name,
+      email: loggedUser.email,
+      phone: '',
+      parcelType: '',
+      parcelWeight: '',
+      receiverName: '',
+      receiverPhone: '',
+      deliveryAddress: '',
+      requestedDeliveryDate: '',
+      deliveryAddressLatitude: '',
+      deliveryAddressLongitude: '',
+      price: 0,
+      status: 'pending',
+      approximateDeliveryDate: '',
+      deliveryMen: ''
+    });
   };
 
   return (
@@ -120,6 +145,7 @@ const ParcelForm = () => {
       <button type="submit" onClick={handleSubmit} className="btn btn-primary mt-4 w-full">
         Submit
       </button>
+      <p className={`${error ? 'my-2 text-red-700' : 'hidden'}`}>{error}</p>
     </form>
   );
 };
