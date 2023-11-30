@@ -39,9 +39,9 @@ const TopDelivery = () => {
                 <p className="text-sm lg:text-base text-center mb-2">Number of parcel Delivered : {man.parcelDelivered}</p>
                 <p className="text-sm lg:text-base text-center mb-2 flex items-center gap-1">
                   Average Ratings:
-                  <div className="rating">
+                  <span className="rating">
                     <input type="radio" name="rating-2" readOnly className="mask mask-star-2 bg-orange-400" checked />
-                  </div>
+                  </span>
                   {man.ratting.toFixed(1)}
                 </p>
               </div>

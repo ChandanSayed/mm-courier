@@ -1,6 +1,6 @@
 const Banner = () => {
   return (
-    <div className="hero min-h-[400px] bg-cover bg-[url(/banner.jpg)]">
+    <div className="hero min-h-[400px] lg:min-h-[500px] bg-cover bg-[url(/banner.jpg)]">
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-neutral-content">
         <div className="max-w-md">
