@@ -34,10 +34,14 @@ const TopDelivery = () => {
           return (
             <div className="card bg-base-100 shadow-xl" key={i}>
               <div className="card-body">
-                <h2 className="text-lg lg:text-2xl text-center">{man.name}</h2>
-                <img src="https://chandansayed.github.io/course-image-links/user.png" alt="Profile Picture" />
-                <p className="text-sm lg:text-base text-center mb-2">Number of parcel Delivered : {man.parcelDelivered}</p>
-                <p className="text-sm lg:text-base text-center mb-2 flex items-center gap-1">
+                <h2 data-aos="fade-up" className="text-lg lg:text-2xl text-center">
+                  {man.name}
+                </h2>
+                <img data-aos="fade-up" src="https://chandansayed.github.io/course-image-links/user.png" alt="Profile Picture" />
+                <p data-aos="fade-up" className="text-sm lg:text-base text-center mb-2">
+                  Number of parcel Delivered : {man.parcelDelivered}
+                </p>
+                <p data-aos="fade-up" className="text-sm lg:text-base text-center mb-2 flex items-center gap-1">
                   Average Ratings:
                   <span className="rating">
                     <input type="radio" name="rating-2" readOnly className="mask mask-star-2 bg-orange-400" checked />
