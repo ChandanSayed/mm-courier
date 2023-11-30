@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Context } from '../context/AppContext';
 import axios from 'axios';
 
-const ParcelForm = () => {
+const UpdateBooking = () => {
   const { loggedUser } = useContext(Context);
   const [formData, setFormData] = useState({
     name: loggedUser.name,
@@ -124,4 +124,4 @@ const ParcelForm = () => {
   );
 };
 
-export default ParcelForm;
+export default UpdateBooking;

@@ -18,6 +18,7 @@ export default function AppContext({ children }) {
         const uid = user.uid;
         setUser(user.displayName);
         setUserPhoto(user.photoURL);
+        setLoggedUser({ name: user.displayName, email: user.email });
       } else {
         console.log('User is signed out');
       }

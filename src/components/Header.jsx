@@ -27,12 +27,6 @@ const Header = () => {
         <NavLink to={'/dashboard'}>Dashboard</NavLink>
       </li>
       <li>
-        <NavLink className={`${user ? '' : 'hidden'}`} to={'/profile'}>
-          Profile
-        </NavLink>
-      </li>
-
-      <li>
         <NavLink to={'/login'} className={`${!user ? '' : 'hidden'}`}>
           Login
         </NavLink>

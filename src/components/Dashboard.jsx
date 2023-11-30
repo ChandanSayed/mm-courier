@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import ParcelForm from './ParcelForm';
 import { Context } from '../context/AppContext';
+import BookingList from './BookingList';
 
 const Dashboard = () => {
   const { loggedUser } = useContext(Context);
@@ -34,7 +35,7 @@ const Dashboard = () => {
           <ParcelForm />
         </div>
         <div className={`w-full ${showTab == 2 ? 'block' : 'hidden'}`}>
-          <h3>Tab 2</h3>
+          <BookingList />
         </div>
         <div className={`w-full ${showTab == 3 ? 'block' : 'hidden'}`}>
           <h3>Tab 3</h3>
