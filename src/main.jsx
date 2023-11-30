@@ -9,6 +9,7 @@ import AppContext from './context/AppContext.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import UpdateBooking from './components/UpdateBooking.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
+import AdminUpdateBooking from './components/AdminUpdateBooking.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <UpdateBooking />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: `/update-status/:id`,
+        element: (
+          <PrivateRoute>
+            <AdminUpdateBooking />
           </PrivateRoute>
         )
       }

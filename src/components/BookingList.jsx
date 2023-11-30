@@ -104,9 +104,17 @@ const BookingList = () => {
                         Update
                       </button>
                     )}
-                    <button className="btn ml-2" onClick={() => handleCancel(list._id)} disabled={list.status.toLowerCase() === 'pending' ? false : true}>
-                      Cancel
-                    </button>
+
+                    {list.status.toLowerCase() === 'delivered' ? (
+                      <button className="btn ml-2">Review</button>
+                    ) : (
+                      <button className="btn ml-2" onClick={() => handleCancel(list._id)} disabled={list.status.toLowerCase() === 'pending' ? false : true}>
+                        Cancel
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    <button className="btn">Pay</button>
                   </td>
                 </tr>
               );

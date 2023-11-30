@@ -2,6 +2,11 @@ import { useState, useContext, useEffect } from 'react';
 import ParcelForm from './ParcelForm';
 import { Context } from '../context/AppContext';
 import BookingList from './BookingList';
+import Profile from './Profile';
+import AllUsers from './AllUsers';
+import AllParcels from './AllParcels';
+import AllDeliveryMen from './AllDeliveryMen';
+import Chart from './Chart';
 
 const Dashboard = () => {
   const { loggedUser, setLoggedUser } = useContext(Context);
@@ -10,7 +15,6 @@ const Dashboard = () => {
   function tabChange(index) {
     setShowTab(index);
   }
-  console.log(loggedUser);
 
   if (!loggedUser) {
   }
@@ -33,13 +37,13 @@ const Dashboard = () => {
           <div className="tab-container flex flex-col">
             {loggedUser.userType.toLowerCase() === 'user' ? (
               <>
-                <button className="text-left" onClick={() => tabChange(1)}>
+                <button className="text-left mt-2" onClick={() => tabChange(1)}>
                   Book a Parcel
                 </button>
-                <button className="text-left" onClick={() => tabChange(2)}>
+                <button className="text-left mt-2" onClick={() => tabChange(2)}>
                   My Parcels
                 </button>
-                <button className="text-left" onClick={() => tabChange(3)}>
+                <button className="text-left mt-2" onClick={() => tabChange(3)}>
                   My Profile
                 </button>
               </>
@@ -47,10 +51,10 @@ const Dashboard = () => {
 
             {loggedUser.userType.toLowerCase() === 'delivery_man' ? (
               <>
-                <button className="text-left" onClick={() => tabChange(1)}>
+                <button className="text-left mt-2" onClick={() => tabChange(1)}>
                   My Delivery List
                 </button>
-                <button className="text-left" onClick={() => tabChange(2)}>
+                <button className="text-left mt-2" onClick={() => tabChange(2)}>
                   My Reviews
                 </button>
               </>
@@ -58,16 +62,16 @@ const Dashboard = () => {
 
             {loggedUser.userType.toLowerCase() === 'admin' ? (
               <>
-                <button className="text-left" onClick={() => tabChange(1)}>
+                <button className="text-left mt-2" onClick={() => tabChange(1)}>
                   All Parcels
                 </button>
-                <button className="text-left" onClick={() => tabChange(2)}>
+                <button className="text-left mt-2" onClick={() => tabChange(2)}>
                   All Users
                 </button>
-                <button className="text-left" onClick={() => tabChange(3)}>
+                <button className="text-left mt-2" onClick={() => tabChange(3)}>
                   All Delivery Men
                 </button>
-                <button className="text-left" onClick={() => tabChange(4)}>
+                <button className="text-left mt-2" onClick={() => tabChange(4)}>
                   Statistics
                 </button>
               </>
@@ -76,6 +80,7 @@ const Dashboard = () => {
         </div>
       </aside>
       <div className="p-4 grow">
+        <p className="text-green-600 text-lg text-center">Welcome to the Dashboard</p>
         {loggedUser.userType.toLowerCase() === 'user' ? (
           <>
             <div className={`w-full ${showTab == 1 ? 'block' : 'hidden'}`}>
@@ -85,7 +90,7 @@ const Dashboard = () => {
               <BookingList />
             </div>
             <div className={`w-full ${showTab == 3 ? 'block' : 'hidden'}`}>
-              <h3>Tab 3</h3>
+              <Profile />
             </div>
           </>
         ) : null}
@@ -102,16 +107,16 @@ const Dashboard = () => {
         {loggedUser.userType.toLowerCase() === 'admin' ? (
           <>
             <div className={`w-full ${showTab == 1 ? 'block' : 'hidden'}`}>
-              <h3>All Parcels</h3>
+              <AllParcels />
             </div>
             <div className={`w-full ${showTab == 2 ? 'block' : 'hidden'}`}>
-              <h3>All Users</h3>
+              <AllUsers />
             </div>
             <div className={`w-full ${showTab == 3 ? 'block' : 'hidden'}`}>
-              <h3>All Delivery Men</h3>
+              <AllDeliveryMen />
             </div>
             <div className={`w-full ${showTab == 4 ? 'block' : 'hidden'}`}>
-              <h3>Statistics</h3>
+              <Chart />
             </div>
           </>
         ) : null}
